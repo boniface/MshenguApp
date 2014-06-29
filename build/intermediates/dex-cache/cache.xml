@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/support-v4-19.1.0-bfe6379f31d17615f5ca4b83bd0a7235fba0720f.jar"
+        jar="/usr/share/android-studio/data/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/classes-562eed71f57c2ee851d54fea7aa15c6ac683cecd.jar"
+        jar="/home/hashcode/AndroidStudioProjects/MshenguApp/build/intermediates/exploded-aar/com.viewpagerindicator/library/2.4.1/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="88e8e18d365173ad04a543d76c157e0b644f0b3f"/>
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/classes-a452a80b673f2cdd25aea18b1374e22edce180fe.jar"
+        jar="/home/hashcode/AndroidStudioProjects/MshenguApp/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/spring-android-rest-template-1.0.1.RELEASE-25f9b0dbd34399f83df5c90253b435a72ea535ce.jar"
+        jar="/home/hashcode/.gradle/caches/modules-2/files-2.1/org.springframework.android/spring-android-rest-template/1.0.1.RELEASE/e132d929bd181941f79b0d63edafb8a86ae6fd33/spring-android-rest-template-1.0.1.RELEASE.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e132d929bd181941f79b0d63edafb8a86ae6fd33"/>
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/gson-2.2.4-a5b685616e415a3a5d3bebed4ca0e7aa5dbfc127.jar"
+        jar="/home/hashcode/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568"/>
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/classes-1e90b27dbe4b0f24f9d8819e82bd4522ed255faf.jar"
+        jar="/home/hashcode/AndroidStudioProjects/MshenguApp/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.3.1/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="0840d832d8a8c4fde01e623f2817332801e6bb49"/>
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/classes-105806a0b6db9b998016cf05cf8fa594e25c089e.jar"
+        jar="/home/hashcode/AndroidStudioProjects/MshenguApp/build/intermediates/exploded-aar/com.google.android.gms/play-services/4.4.52/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3dfdf1db5ce5ea2999a5dcde8c8e650b02660059"/>
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/android-integration-3.1.0-3bf1056cdc42c7cc51c026fad5ad21f900968401.jar"
+        jar="/home/hashcode/.gradle/caches/modules-2/files-2.1/com.google.zxing/android-integration/3.1.0/52707c1c0801b4e1c0ca9bdbabd2dae20d8564d7/android-integration-3.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="52707c1c0801b4e1c0ca9bdbabd2dae20d8564d7"/>
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/spring-android-core-1.0.1.RELEASE-e9c4a1cfc705a614b3693ce8952632b077c1ac82.jar"
+        jar="/home/hashcode/.gradle/caches/modules-2/files-2.1/org.springframework.android/spring-android-core/1.0.1.RELEASE/e68f0e8e4b636ee30c4de58953be38d9b72a5e3b/spring-android-core-1.0.1.RELEASE.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e68f0e8e4b636ee30c4de58953be38d9b72a5e3b"/>
+    <item
+        dex="/home/hashcode/AndroidStudioProjects/MshenguApp/mshenguapp/build/intermediates/pre-dexed/debug/core-3.1.0-a3f6f2d3562f799fa5a9b055abe92d58e59f2df8.jar"
+        jar="/home/hashcode/.gradle/caches/modules-2/files-2.1/com.google.zxing/core/3.1.0/908e18674f895e3e1fa8f4a954b8c637a23d2801/core-3.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="908e18674f895e3e1fa8f4a954b8c637a23d2801"/>
+
+</pre-dex-items>

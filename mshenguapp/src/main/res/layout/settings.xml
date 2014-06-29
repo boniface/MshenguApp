@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:padding="10dp"
+                android:text="Server Address (URL) "
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:id="@+id/tv_url"
+                />
+
+            EditText
+
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:inputType="textUri"
+                android:id="@+id/url_editText"
+                android:hint="Server URL"
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:padding="10dp"
+                android:text="Truck Pass Code "
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:id="@+id/truck_label_id"
+                />
+
+            <EditText
+
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:inputType="text"
+                android:id="@+id/track_pass_code"
+                android:hint="Truck Pass Code"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:textSize="20dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                style="@style/btnStyleGenoa"
+                android:text="Add Settings"
+                android:id="@+id/url_add_button"
+                android:background="@xml/mshengubutton"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                style="@style/btnStyleGenoa"
+                android:text="Cancel"
+                android:id="@+id/url_cancel"
+                android:background="@xml/mshengubutton"
+                />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/loadSitesButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/btnStyleGenoa"
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:background="@xml/mshengubutton"
+            android:text="Load Sites"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal"
+
+            android:textSize="20dp"
+            android:id="@+id/current_url_label"
+            />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/btnStyleGenoa"
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:id="@+id/loadTrucksButton"
+            android:background="@xml/mshengubutton"
+            android:text="Load Trucks"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal"
+
+            android:textSize="20dp"
+            android:id="@+id/current_url"
+            />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal"
+
+            android:textSize="20dp"
+            android:id="@+id/current_truck_label"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal"
+
+            android:textSize="20dp"
+            android:id="@+id/current_truck_code"
+            />
+
+    </LinearLayout>
+</ScrollView>

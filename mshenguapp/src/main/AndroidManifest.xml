@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="zm.hashcode.android.mshengu" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!-- External storage for caching. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Maps API needs OpenGL ES 2.0. -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/launcher_icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Map"
+            android:label="@string/title_activity_map" >
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:label="@string/title_activity_settings" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyC6mJq0dsSvxnbxeEWXefRBl5a607kgwnw" />
+
+        <service
+            android:name=".services.TrucksIntentService"
+            android:exported="false" >
+        </service>
+        <service
+            android:name=".services.LocationIntentService"
+            android:exported="false" >
+        </service>
+
+        <provider
+            android:name=".providers.TrucksProvider"
+            android:authorities="zm.hashcode.android.mshengu.providers.trucks"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+        <provider
+            android:name=".providers.SitesProvider"
+            android:authorities="zm.hashcode.android.mshengu.providers.sites"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+        <provider
+            android:name=".providers.LocationsProvider"
+            android:authorities="zm.hashcode.android.mshengu.providers.locations"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+        <provider
+            android:name=".providers.SettingsProvider"
+            android:authorities="zm.hashcode.android.mshengu.providers.settings"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+        <provider
+            android:name=".providers.UsersProvider"
+            android:authorities="zm.hashcode.android.mshengu.providers.users"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+        <provider
+            android:name=".providers.DeployProvider"
+            android:authorities="zm.hashcode.android.mshengu.providers.deploy"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+        <provider
+            android:name=".providers.ServiceProvider"
+            android:authorities="zm.hashcode.android.mshengu.providers.service"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+        <provider
+            android:name=".providers.DeviceTruckProvider"
+            android:authorities="zm.hashcode.android.mshengu.providers.devicetruck"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+    </application>
+
+</manifest>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MshenguApp.iml" filepath="$PROJECT_DIR$/MshenguApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mshenguapp/mshenguapp.iml" filepath="$PROJECT_DIR$/mshenguapp/mshenguapp.iml" />
+    </modules>
+  </component>
+</project>
+
