@@ -15,27 +15,28 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import zm.hashcode.android.mshengu.database.TruckDbHelper;
-import zm.hashcode.android.mshengu.database.TruckTable;
+import zm.hashcode.android.mshengu.database.UserTable;
+import zm.hashcode.android.mshengu.database.UserDbHelper;
 
-import static zm.hashcode.android.mshengu.database.TruckTable.TRUCK_TYPE_DIR;
+import static zm.hashcode.android.mshengu.database.UserTable.USER_TYPE_DIR;
 
 public class UsersProvider extends ContentProvider {
     public UsersProvider() {
     }
 
-    private static final String TAG = TrucksProvider.class.getSimpleName();
-    private TruckDbHelper dbHelper;
+    private static final String TAG = UsersProvider.class.getSimpleName();
+    private UserDbHelper dbHelper;
 
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sURIMatcher.addURI(TruckTable.AUTHORITY, TruckTable.TABLE, TruckTable.ALL_ROWS);
-        sURIMatcher.addURI(TruckTable.AUTHORITY, TruckTable.TABLE + "/#", TruckTable.SINGLE_ROW);
+        sURIMatcher.addURI(UserTable.AUTHORITY, UserTable.TABLE, UserTable.ALL_ROWS);
+        sURIMatcher.addURI(UserTable.AUTHORITY, UserTable.TABLE + "/#", UserTable.SINGLE_ROW);
     }
 
     @Override
     public boolean onCreate() {
-        dbHelper = new TruckDbHelper(getContext());
+        dbHelper = new UserDbHelper(getContext());
         Log.d(TAG, "onCreated");
         return true;
     }
@@ -43,12 +44,12 @@ public class UsersProvider extends ContentProvider {
     @Override
     public String getType(Uri uri) {
         switch (sURIMatcher.match(uri)) {
-            case TruckTable.ALL_ROWS:
-                Log.d(TAG, "gotType: " + TRUCK_TYPE_DIR);
-                return TRUCK_TYPE_DIR;
-            case TruckTable.SINGLE_ROW:
-                Log.d(TAG, "gotType: " + TruckTable.TRUCK_TYPE_ITEM);
-                return TruckTable.TRUCK_TYPE_ITEM;
+            case UserTable.ALL_ROWS:
+                Log.d(TAG, "gotType: " + USER_TYPE_DIR);
+                return USER_TYPE_DIR;
+            case UserTable.SINGLE_ROW:
+                Log.d(TAG, "gotType: " + UserTable.USER_TYPE_ITEM);
+                return UserTable.USER_TYPE_ITEM;
             default:
                 throw new IllegalArgumentException("Illegal URI: " + uri);
         }
@@ -58,15 +59,15 @@ public class UsersProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         Uri ret = null;
         // Assert correct uri
-        if (sURIMatcher.match(uri) != TruckTable.ALL_ROWS) {
+        if (sURIMatcher.match(uri) != UserTable.ALL_ROWS) {
             throw new IllegalArgumentException("Illegal uri: " + uri);
         }
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        long rowId = db.insertWithOnConflict(TruckTable.TABLE, null,
+        long rowId = db.insertWithOnConflict(UserTable.TABLE, null,
                 values, SQLiteDatabase.CONFLICT_IGNORE);
         // Was insert successful?
         if (rowId != -1) {
-            long id = values.getAsLong(TruckTable.Column.ID);
+            long id = values.getAsLong(UserTable.Column.ID);
             ret = ContentUris.withAppendedId(uri, id);
             Log.d(TAG, "inserted uri: " + ret);
             // Notify that data for this uri has changed
@@ -80,13 +81,13 @@ public class UsersProvider extends ContentProvider {
                       String[] selectionArgs) {
         String where;
         switch (sURIMatcher.match(uri)) {
-            case TruckTable.ALL_ROWS:
+            case UserTable.ALL_ROWS:
                 // so we count updated rows
                 where = selection;
                 break;
-            case TruckTable.SINGLE_ROW:
+            case UserTable.SINGLE_ROW:
                 long id = ContentUris.parseId(uri);
-                where = TruckTable.Column.ID
+                where = UserTable.Column.ID
                         + "="
                         + id
                         + (TextUtils.isEmpty(selection) ? "" : " and ( "
@@ -96,7 +97,7 @@ public class UsersProvider extends ContentProvider {
                 throw new IllegalArgumentException("Illegal uri: " + uri);
         }
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int ret = db.update(TruckTable.TABLE, values, where,
+        int ret = db.update(UserTable.TABLE, values, where,
                 selectionArgs);
         if (ret > 0) {
             // Notify that data for this uri has changed
@@ -111,13 +112,13 @@ public class UsersProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         String where;
         switch (sURIMatcher.match(uri)) {
-            case TruckTable.ALL_ROWS:
+            case UserTable.ALL_ROWS:
 // so we count deleted rows
                 where = (selection == null) ? "1" : selection;
                 break;
-            case TruckTable.SINGLE_ROW:
+            case UserTable.SINGLE_ROW:
                 long id = ContentUris.parseId(uri);
-                where = TruckTable.Column.ID
+                where = UserTable.Column.ID
                         + "="
                         + id
                         + (TextUtils.isEmpty(selection) ? "" : " and ( "
@@ -127,7 +128,7 @@ public class UsersProvider extends ContentProvider {
                 throw new IllegalArgumentException("Illegal uri: " + uri);
         }
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int ret = db.delete(TruckTable.TABLE, where, selectionArgs);
+        int ret = db.delete(UserTable.TABLE, where, selectionArgs);
         if (ret > 0) {
             // Notify that data for this uri has changed
             getContext().getContentResolver().notifyChange(uri, null);
@@ -147,22 +148,22 @@ public class UsersProvider extends ContentProvider {
         checkColumns(projection);
 
         // Set the table
-        queryBuilder.setTables(TruckTable.TABLE);
+        queryBuilder.setTables(UserTable.TABLE);
 
         switch (sURIMatcher.match(uri)) {
-            case TruckTable.ALL_ROWS:
+            case UserTable.ALL_ROWS:
                 break;
 
-            case TruckTable.SINGLE_ROW:
+            case UserTable.SINGLE_ROW:
                 // adding the ID to the original query
-                queryBuilder.appendWhere(TruckTable.Column.ID + "=" + uri.getLastPathSegment());
+                queryBuilder.appendWhere(UserTable.Column.ID + "=" + uri.getLastPathSegment());
                 break;
 
             default:
                 throw new IllegalArgumentException("Illegal uri: " + uri);
         }
 
-        String orderBy = (TextUtils.isEmpty(sortOrder)) ? TruckTable.DEFAULT_SORT : sortOrder;
+        String orderBy = (TextUtils.isEmpty(sortOrder)) ? UserTable.DEFAULT_SORT : sortOrder;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, orderBy);
         // register for uri changes
@@ -172,7 +173,7 @@ public class UsersProvider extends ContentProvider {
     }
 
     private void checkColumns(String[] projection) {
-        String[] available = { TruckTable.Column.ID,TruckTable.Column.TRUCKID, TruckTable.Column.NUMBERPLATE, TruckTable.Column.VEHICLENUMBER};
+        String[] available = { UserTable.Column.ID,UserTable.Column.DEVICEKEY, UserTable.Column.EMAIL,UserTable.Column.USERNAME, UserTable.Column.PASSWORD};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
             HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));

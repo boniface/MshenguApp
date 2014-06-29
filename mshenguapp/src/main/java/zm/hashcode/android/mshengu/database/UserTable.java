@@ -18,8 +18,8 @@ public class UserTable {
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE);
     public static final int ALL_ROWS = 1;
     public static final int SINGLE_ROW = 2;
-    public static final String TUSER_TYPE_ITEM ="vnd.android.cursor.item/vnd.zm.hashcode.android.mshengu.provider.user";
-    public static final String USERTYPE_DIR = "vnd.android.cursor.dir/vnd.zm.hashcode.android.mshengu.provider.user";
+    public static final String USER_TYPE_ITEM ="vnd.android.cursor.item/vnd.zm.hashcode.android.mshengu.provider.user";
+    public static final String USER_TYPE_DIR = "vnd.android.cursor.dir/vnd.zm.hashcode.android.mshengu.provider.user";
     public static final String DEFAULT_SORT = Column.USERNAME + " DESC";
 
     public class Column {

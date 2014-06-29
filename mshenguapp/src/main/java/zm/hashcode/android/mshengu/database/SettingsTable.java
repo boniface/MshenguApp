@@ -17,7 +17,7 @@ public class SettingsTable {
 
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE);
     public static final int ALL_ROWS = 1;
-    public static final int SETTING_ROW = 2;
+    public static final int SINGLE_ROW = 2;
     public static final String SETTING_TYPE_ITEM ="vnd.android.cursor.item/vnd.zm.hashcode.android.mshengu.provider.setting";
     public static final String SETTING_TYPE_DIR = "vnd.android.cursor.dir/vnd.zm.hashcode.android.mshengu.provider.setting";
     public static final String DEFAULT_SORT = Column.SITETYPE + " DESC";
