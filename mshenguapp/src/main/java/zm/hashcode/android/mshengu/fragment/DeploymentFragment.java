@@ -1,22 +1,36 @@
 package zm.hashcode.android.mshengu.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import zm.hashcode.android.mshengu.R;
+import zm.hashcode.android.mshengu.location.LocationUtil;
 import zm.hashcode.android.mshengu.services.LocationIntentService;
 
 
 public class DeploymentFragment extends Fragment {
     View v,layout_green,layout_red;
+    LocationUtil locationListenerClass;
+    Location location;
+    double latitude=0,longitude=0;
+    List<String> sites=new ArrayList<String>();
+    AutoCompleteTextView actv;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -32,16 +46,63 @@ public class DeploymentFragment extends Fragment {
                 IntentIntegrator integrator = new IntentIntegrator(getActivity());
                 integrator.initiateScan();
                 EditText lat = (EditText) getView().findViewById(R.id.latDeployment);
-                lat.setText("asdasd");
+                lat.setText("");
                 EditText lon = (EditText) getView().findViewById(R.id.lonDeployment);
-                lon.setText("sdsdsad");
-//                autoCompleteTextBox();
+                lon.setText("");
+                autoCompleteTextBox();
 
-//                calculateLocation(getActivity().getApplicationContext());
+                calculateLocation(getActivity().getApplicationContext());
 
             }
         });
 
         return v;
+    }
+
+    @Override
+    public void onStart()
+    {    super.onStart();
+        locationListenerClass=new LocationUtil(v.getContext());
+    }
+
+    @Override
+    public void onStop()
+    {
+        locationListenerClass.stopUpdates();
+        super.onStop();
+    }
+
+    public void autoCompleteTextBox()
+    {
+        Context ctx=getActivity().getApplicationContext();
+        AutoCompleteTextView actv=(AutoCompleteTextView) v.findViewById(R.id.actv_site);
+        // Polpulate List Here
+        actv.setAdapter(new ArrayAdapter<String>(ctx,R.layout.list_detail,sites));
+
+    }
+
+    public void calculateLocation(Context ctx)
+    {
+        try{
+
+            location=locationListenerClass.getUpdatedLocation();
+            latitude=location.getLatitude();
+            longitude=location.getLongitude();
+            locationListenerClass.stopUpdates();
+            EditText lat=(EditText) v.findViewById(R.id.latDeployment);
+            lat.setText(String.valueOf(latitude));
+            EditText lon=(EditText) v.findViewById(R.id.lonDeployment);
+            lon.setText(String.valueOf(longitude));
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(ctx, "Could not find location.", Toast.LENGTH_LONG).show();
+            Toast.makeText(ctx, "Turn on location services of the device", Toast.LENGTH_LONG).show();
+            EditText lat=(EditText) v.findViewById(R.id.latDeployment);
+            lat.setHint("Location not found");
+            EditText lon=(EditText) v.findViewById(R.id.lonDeployment);
+            lon.setHint("Location not found");
+        }
+
     }
 }
