@@ -104,6 +104,15 @@
             android:enabled="true"
             android:exported="true" >
         </provider>
+
+        <activity
+            android:name=".LoadData"
+            android:label="@string/title_activity_load_data" >
+        </activity>
+        <activity
+            android:name=".SetDevice"
+            android:label="@string/title_activity_set_device" >
+        </activity>
     </application>
 
 </manifest>

@@ -93,6 +93,8 @@ public class TrucksIntentService extends IntentService {
      * parameters.
      */
     private void handleActionLoadTrucks() {
+
+
         Cursor cursor;
 
         ContentValues values = new ContentValues();

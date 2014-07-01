@@ -37,6 +37,7 @@ public class DeploymentFragment extends Fragment {
         v = inflater.inflate(R.layout.deployment,container,false);
 
         Button scanButton = (Button) v.findViewById(R.id.scanButtonDeployment);
+        Button deployButton = (Button) v.findViewById(R.id.tagButton);
 
 
 
@@ -56,8 +57,20 @@ public class DeploymentFragment extends Fragment {
             }
         });
 
+        deployButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+
+
+            }
+        });
+
+
+
         return v;
     }
+
+
 
     @Override
     public void onStart()

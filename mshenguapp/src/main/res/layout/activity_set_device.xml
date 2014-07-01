@@ -18,24 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
+            <AutoCompleteTextView android:id="@+id/setdata_truck_dropdown"
+                android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                style="@style/btnStyleGenoa"
-                android:textSize="20dp"
-                android:layout_margin="10dp"
-                android:padding="15dp"
-                android:id="@+id/settings_load_device_data_Button"
-                android:background="@xml/mshengubutton"
-                android:text="Load Device Data"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_gravity="center_horizontal"
-                android:textSize="20dp"
-                android:id="@+id/settings_load_data_status"
+                android:layout_marginLeft="10dp"
+                android:hint="Select Truck"
                 />
 
             <Button
@@ -45,9 +32,9 @@
                 android:textSize="20dp"
                 android:layout_margin="10dp"
                 android:padding="15dp"
-                android:id="@+id/settings_set_data_device"
+                android:id="@+id/setdata_set_truck_button"
                 android:background="@xml/mshengubutton"
-                android:text="Set Data For  Device"/>
+                android:text="Load Trucks"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +42,32 @@
                 android:padding="10dp"
                 android:layout_gravity="center_horizontal"
                 android:textSize="20dp"
-                android:id="@+id/settings_set_data_status"
+                android:id="@+id/setdata_truck_set_message"
+                />
+
+            <Spinner
+                android:id="@+id/setdata_set_site_dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/btnStyleGenoa"
+                android:textSize="20dp"
+                android:layout_margin="10dp"
+                android:padding="15dp"
+                android:id="@+id/setdata_set_site_button"
+                android:background="@xml/mshengubutton"
+                android:text="Set Device Site"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:id="@+id/setdata_site_message"
                 />
 
             <Button
@@ -65,9 +77,9 @@
                 android:textSize="40dp"
                 android:layout_margin="10dp"
                 android:padding="15dp"
-                android:id="@+id/settings_home_button"
+                android:id="@+id/setdata_settings_button"
                 android:background="@xml/rounded_rect"
-                android:text="Home"/>
+                android:text="Settings"/>
 
         </LinearLayout>
     </ScrollView>
