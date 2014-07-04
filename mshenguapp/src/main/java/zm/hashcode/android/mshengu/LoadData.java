@@ -8,30 +8,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import zm.hashcode.android.mshengu.R;
-import zm.hashcode.android.mshengu.services.TrucksIntentService;
-
 public class LoadData extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_data);
-        Button loadTruckButton=(Button)findViewById(R.id.loadsite_truck_button);
-        Button loadSitesButton=(Button)findViewById(R.id.loadsite_sites_button);
-        Button settingsButton=(Button)findViewById(R.id.loadsite_settings_button);
 
-        loadTruckButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                TrucksIntentService.startActionLoadTrucks(v.getContext());
-//                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
+        Button loadSitesButton = (Button) findViewById(R.id.loadsite_sites_button);
+        Button settingsButton = (Button) findViewById(R.id.loadsite_settings_button);
 
 
-            }
-        } );
         loadSitesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -42,17 +29,17 @@ public class LoadData extends Activity {
 
 
             }
-        } );
+        });
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),Settings.class);
+                Intent intent = new Intent(getApplicationContext(), Settings.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
 
             }
-        } );
+        });
 
 
     }

@@ -17,15 +17,15 @@ public class UserDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = String
-                .format("create table %s (%s int primary key, %s text, %s text, %s int)",
-                        UserTable.TABLE,
-                        UserTable.Column.ID,
-                        UserTable.Column.DEVICEKEY,
-                        UserTable.Column.EMAIL,
-                        UserTable.Column.PASSWORD,
-                        UserTable.Column.USERNAME
-                );
+
+        String sql = " CREATE TABLE " + UserTable.TABLE
+                + "( "
+                + UserTable.Column.ID + " integer primary key autoincrement, "
+                + UserTable.Column.DEVICEKEY + " text, "
+                + UserTable.Column.EMAIL + " text, "
+                + UserTable.Column.PASSWORD + " text, "
+                + UserTable.Column.USERNAME + " text "
+                + " ) ";
 //
         Log.d(TAG, "onCreate with SQL: " + sql);
         db.execSQL(sql);

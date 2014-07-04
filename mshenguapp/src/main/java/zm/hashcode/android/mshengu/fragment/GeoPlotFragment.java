@@ -15,14 +15,14 @@ import zm.hashcode.android.mshengu.R;
  * to handle interaction events.
  * Use the {@link GeoPlotFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class GeoPlotFragment extends Fragment {
-    View v,layout_green,layout_red;
+    View v, layout_green, layout_red;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.geoplot,container,false);
+        v = inflater.inflate(R.layout.geoplot, container, false);
         return v;
     }
 }

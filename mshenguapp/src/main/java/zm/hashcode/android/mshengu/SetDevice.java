@@ -2,7 +2,6 @@ package zm.hashcode.android.mshengu;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,17 +9,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import zm.hashcode.android.mshengu.R;
+import zm.hashcode.android.mshengu.services.SitesIntentService;
+import zm.hashcode.android.mshengu.services.TrucksIntentService;
 
 public class SetDevice extends Activity implements AdapterView.OnItemSelectedListener {
     private Spinner siteDropDown;
-    private  String   url;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +28,25 @@ public class SetDevice extends Activity implements AdapterView.OnItemSelectedLis
         addSiteDropDown();
         addListenerOnButton();
 
-        Button setSiteButton=(Button)findViewById(R.id.setdata_set_site_button);
+        Button setSiteButton = (Button) findViewById(R.id.setdata_set_site_button);
+        Button loadTrucksButton = (Button) findViewById(R.id.setdata_load_trucks_button);
+        Button setTruckButton = (Button) findViewById(R.id.setdata_set_truck_button);
+        Button settingsButton = (Button) findViewById(R.id.setdata_settings_button);
         setSiteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                System.out.println( " THE URL IS NOW " +url);
+                SitesIntentService.startActionSetSite(v.getContext(), url, "New");
+            }
+        });
+        loadTrucksButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                TrucksIntentService.startActionLoadTrucks(v.getContext());
+
+            }
+        });
+
+        setTruckButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                System.out.println(" THE URL IS NOW " + url);
 
 ////                TrucksIntentService.startActionLoadTrucks(v.getContext());
 //                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
@@ -42,6 +56,18 @@ public class SetDevice extends Activity implements AdapterView.OnItemSelectedLis
 
             }
         });
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Settings.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+
+            }
+        });
+
+
     }
 
 
@@ -71,8 +97,8 @@ public class SetDevice extends Activity implements AdapterView.OnItemSelectedLis
         List<String> list = new ArrayList<String>();
         list.add("http://kmis.mshengutoilethire.co.za/mshengu/api/");
         list.add("http://212.71.251.128/mshengu/api/");
-        list.add("http://localhost:8084/mshengu/api/");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+        list.add("http://155.238.32.88:8080/mshengu/api/");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         siteDropDown.setAdapter(dataAdapter);
     }
@@ -81,19 +107,16 @@ public class SetDevice extends Activity implements AdapterView.OnItemSelectedLis
     public void addListenerOnButton() {
         siteDropDown = (Spinner) findViewById(R.id.setdata_set_site_dropdown);
         siteDropDown.setOnItemSelectedListener(this);
-
-
     }
 
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-        url =String.valueOf(siteDropDown.getSelectedItem());
+        url = String.valueOf(siteDropDown.getSelectedItem());
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        url="";
+        url = "";
     }
 }

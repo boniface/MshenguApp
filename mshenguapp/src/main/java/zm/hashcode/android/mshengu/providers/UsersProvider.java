@@ -14,9 +14,8 @@ import android.util.Log;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import zm.hashcode.android.mshengu.database.TruckDbHelper;
-import zm.hashcode.android.mshengu.database.UserTable;
 import zm.hashcode.android.mshengu.database.UserDbHelper;
+import zm.hashcode.android.mshengu.database.UserTable;
 
 import static zm.hashcode.android.mshengu.database.UserTable.USER_TYPE_DIR;
 
@@ -140,7 +139,7 @@ public class UsersProvider extends ContentProvider {
     // SELECT username, message, created_at FROM status WHERE user='bob' ORDER
     // BY created_at DESC;
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         // Uisng SQLiteQueryBuilder instead of query() method
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
@@ -163,9 +162,8 @@ public class UsersProvider extends ContentProvider {
                 throw new IllegalArgumentException("Illegal uri: " + uri);
         }
 
-        String orderBy = (TextUtils.isEmpty(sortOrder)) ? UserTable.DEFAULT_SORT : sortOrder;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, orderBy);
+        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, UserTable.DEFAULT_SORT);
         // register for uri changes
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         Log.d(TAG, "queried records: " + cursor.getCount());
@@ -173,7 +171,7 @@ public class UsersProvider extends ContentProvider {
     }
 
     private void checkColumns(String[] projection) {
-        String[] available = { UserTable.Column.ID,UserTable.Column.DEVICEKEY, UserTable.Column.EMAIL,UserTable.Column.USERNAME, UserTable.Column.PASSWORD};
+        String[] available = {UserTable.Column.ID, UserTable.Column.DEVICEKEY, UserTable.Column.EMAIL, UserTable.Column.USERNAME, UserTable.Column.PASSWORD};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
             HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));

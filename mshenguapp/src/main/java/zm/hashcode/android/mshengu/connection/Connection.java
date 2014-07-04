@@ -17,6 +17,7 @@ import java.util.List;
 
 import zm.hashcode.android.mshengu.resources.GeoplotResource;
 import zm.hashcode.android.mshengu.resources.SiteResource;
+import zm.hashcode.android.mshengu.resources.TruckResources;
 import zm.hashcode.android.mshengu.resources.UnitDeliveryResource;
 import zm.hashcode.android.mshengu.resources.UnitServiceResource;
 
@@ -24,6 +25,11 @@ import zm.hashcode.android.mshengu.resources.UnitServiceResource;
  * Created by hashcode on 2014/07/01.
  */
 public class Connection {
+    final String url;
+
+    public Connection(String url) {
+        this.url = url;
+    }
 
     public HttpHeaders getContentType() {
         HttpHeaders requestHeaders = new HttpHeaders();
@@ -33,7 +39,7 @@ public class Connection {
     }
 
     public MobileResponseMessage postDeployment(UnitDeliveryResource unitDeliveryResource) {
-        final String url =getURL()+"tagunit";
+        final String url = getURL() + "tagunit";
         HttpEntity<UnitDeliveryResource> requestEntity = new HttpEntity<UnitDeliveryResource>(unitDeliveryResource, getContentType());
         ResponseEntity<MobileResponseMessage> response = getConnection().exchange(url, HttpMethod.POST, requestEntity, MobileResponseMessage.class);
         return response.getBody();
@@ -41,16 +47,15 @@ public class Connection {
 
 
     public MobileResponseMessage postUnitService(UnitServiceResource unitServiceResource) {
-        final String url =getURL()+"serviceunit";
+        final String url = getURL() + "serviceunit";
         HttpEntity<UnitServiceResource> requestEntity = new HttpEntity<UnitServiceResource>(unitServiceResource, getContentType());
         ResponseEntity<MobileResponseMessage> response = getConnection().exchange(url, HttpMethod.POST, requestEntity, MobileResponseMessage.class);
         return response.getBody();
     }
 
 
-
     public MobileResponseMessage postGeoPlot(GeoplotResource geoplotResource) {
-        final String url =getURL()+"geoplot";
+        final String url = getURL() + "geoplot";
         HttpEntity<GeoplotResource> requestEntity = new HttpEntity<GeoplotResource>(geoplotResource, getContentType());
         ResponseEntity<MobileResponseMessage> response = getConnection().exchange(url, HttpMethod.POST, requestEntity, MobileResponseMessage.class);
         return response.getBody();
@@ -65,9 +70,9 @@ public class Connection {
 
 
     public List<SiteResource> getSites(int size) {
-        String siteSize=String.valueOf(size);
-        final String url =getURL()+"sites/"+siteSize;
-        Log.d("url",url);
+        String siteSize = String.valueOf(size);
+        final String url = getURL() + "sites/" + siteSize;
+        Log.d("url", url);
         List<SiteResource> sites = new ArrayList<SiteResource>();
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
@@ -84,10 +89,28 @@ public class Connection {
         return sites;
     }
 
-    public String getURL()
-    {
-        String url_val="";
+    public List<TruckResources> getTrucks() {
+        final String url = getURL() + "trucks";
+        Log.d("url", url);
+        List<TruckResources> trucks = new ArrayList<TruckResources>();
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
+        HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
+        ResponseEntity<TruckResources[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, TruckResources[].class);
+        TruckResources[] events = responseEntity.getBody();
 
+        for (TruckResources event : events) {
+            trucks.add(event);
+        }
+        Log.d("sites", trucks.toString());
+        return trucks;
+    }
+
+
+    public String getURL() {
+        String url_val = url;
         return url_val;
 
     }

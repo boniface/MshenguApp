@@ -139,7 +139,7 @@ public class LocationsProvider extends ContentProvider {
     // SELECT username, message, created_at FROM status WHERE user='bob' ORDER
     // BY created_at DESC;
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         // Uisng SQLiteQueryBuilder instead of query() method
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
@@ -162,9 +162,9 @@ public class LocationsProvider extends ContentProvider {
                 throw new IllegalArgumentException("Illegal uri: " + uri);
         }
 
-        String orderBy = (TextUtils.isEmpty(sortOrder)) ? LocationsTable.DEFAULT_SORT : sortOrder;
+
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, orderBy);
+        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, LocationsTable.DEFAULT_SORT);
         // register for uri changes
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         Log.d(TAG, "queried records: " + cursor.getCount());
@@ -172,7 +172,7 @@ public class LocationsProvider extends ContentProvider {
     }
 
     private void checkColumns(String[] projection) {
-        String[] available = { LocationsTable.Column.ID,LocationsTable.Column.DATETIME, LocationsTable.Column.LATITUDE, LocationsTable.Column.LONGITUDE};
+        String[] available = {LocationsTable.Column.ID, LocationsTable.Column.DATETIME, LocationsTable.Column.LATITUDE, LocationsTable.Column.LONGITUDE};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
             HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));

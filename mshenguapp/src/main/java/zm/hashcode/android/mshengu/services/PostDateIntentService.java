@@ -1,21 +1,21 @@
 package zm.hashcode.android.mshengu.services;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
+import android.content.Context;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
- * <p/>
+ * <p>
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
-public class LocationIntentService extends IntentService {
+public class PostDateIntentService extends IntentService {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_FOO = "zm.hashcode.android.mshengu.services.action.FOO";
-    private static final String ACTION_BAZ = "zm.hashcode.android.mshengu.services.action.BAZ";
+    private static final String ACTION_DEPLOY = "zm.hashcode.android.mshengu.services.action.DEPLOY";
+    private static final String ACTION_SERVICE = "zm.hashcode.android.mshengu.services.action.SERVICE";
 
     // TODO: Rename parameters
     private static final String EXTRA_PARAM1 = "zm.hashcode.android.mshengu.services.extra.PARAM1";
@@ -29,8 +29,8 @@ public class LocationIntentService extends IntentService {
      */
     // TODO: Customize helper method
     public static void startActionFoo(Context context, String param1, String param2) {
-        Intent intent = new Intent(context, LocationIntentService.class);
-        intent.setAction(ACTION_FOO);
+        Intent intent = new Intent(context, PostDateIntentService.class);
+        intent.setAction(ACTION_DEPLOY);
         intent.putExtra(EXTRA_PARAM1, param1);
         intent.putExtra(EXTRA_PARAM2, param2);
         context.startService(intent);
@@ -44,26 +44,26 @@ public class LocationIntentService extends IntentService {
      */
     // TODO: Customize helper method
     public static void startActionBaz(Context context, String param1, String param2) {
-        Intent intent = new Intent(context, LocationIntentService.class);
-        intent.setAction(ACTION_BAZ);
+        Intent intent = new Intent(context, PostDateIntentService.class);
+        intent.setAction(ACTION_SERVICE);
         intent.putExtra(EXTRA_PARAM1, param1);
         intent.putExtra(EXTRA_PARAM2, param2);
         context.startService(intent);
     }
 
-    public LocationIntentService() {
-        super("LocationIntentService");
+    public PostDateIntentService() {
+        super("PostDateIntentService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            if (ACTION_FOO.equals(action)) {
+            if (ACTION_DEPLOY.equals(action)) {
                 final String param1 = intent.getStringExtra(EXTRA_PARAM1);
                 final String param2 = intent.getStringExtra(EXTRA_PARAM2);
                 handleActionFoo(param1, param2);
-            } else if (ACTION_BAZ.equals(action)) {
+            } else if (ACTION_SERVICE.equals(action)) {
                 final String param1 = intent.getStringExtra(EXTRA_PARAM1);
                 final String param2 = intent.getStringExtra(EXTRA_PARAM2);
                 handleActionBaz(param1, param2);

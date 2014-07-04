@@ -11,32 +11,13 @@
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        >
+        android:layout_height="fill_parent">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                style="@style/btnStyleGenoa"
-                android:textSize="20dp"
-                android:layout_margin="10dp"
-                android:padding="15dp"
-                android:id="@+id/loadsite_truck_button"
-                android:background="@xml/mshengubutton"
-                android:text="Load Trucks"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_gravity="center_horizontal"
-                android:textSize="20dp"
-                android:id="@+id/loadsite_truck_message"
-                />
 
             <Button
                 android:layout_width="fill_parent"
@@ -47,7 +28,7 @@
                 android:padding="15dp"
                 android:id="@+id/loadsite_sites_button"
                 android:background="@xml/mshengubutton"
-                android:text="Load Sites"/>
+                android:text="Load Sites" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,8 +36,8 @@
                 android:padding="10dp"
                 android:layout_gravity="center_horizontal"
                 android:textSize="20dp"
-                android:id="@+id/loadsite_load_message"
-                />
+                android:id="@+id/loadsite_load_message" />
+
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -66,7 +47,7 @@
                 android:padding="15dp"
                 android:id="@+id/loadsite_settings_button"
                 android:background="@xml/rounded_rect"
-                android:text="Settings"/>
+                android:text="Settings" />
 
         </LinearLayout>
     </ScrollView>

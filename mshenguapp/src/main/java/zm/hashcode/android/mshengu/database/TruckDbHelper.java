@@ -17,13 +17,14 @@ public class TruckDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = String
-                .format("create table %s (%s int primary key, %s text, %s text, %s int)",
-                        TruckTable.TABLE,
-                        TruckTable.Column.ID,
-                        TruckTable.Column.TRUCKID,
-                        TruckTable.Column.NUMBERPLATE,
-                        TruckTable.Column.VEHICLENUMBER);
+
+        String sql = " CREATE TABLE " + TruckTable.TABLE
+                + "( "
+                + TruckTable.Column.ID + " integer primary key autoincrement, "
+                + TruckTable.Column.TRUCKID + " text, "
+                + TruckTable.Column.NUMBERPLATE + " text, "
+                + TruckTable.Column.VEHICLENUMBER + " text "
+                + ")";
 //
         Log.d(TAG, "onCreate with SQL: " + sql);
         db.execSQL(sql);

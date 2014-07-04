@@ -17,13 +17,15 @@ public class DeviceTruckDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = String
-                .format("create table %s (%s int primary key, %s text, %s text, %s int)",
-                        DeviceTruckTable.TABLE,
-                        DeviceTruckTable.Column.ID,
-                        DeviceTruckTable.Column.TRUCKID,
-                        DeviceTruckTable.Column.NUMBERPLATE,
-                        DeviceTruckTable.Column.VEHICLENUMBER);
+
+
+        String sql = " CREATE TABLE " + DeviceTruckTable.TABLE
+                + "( "
+                + DeviceTruckTable.Column.ID + " integer primary key autoincrement, "
+                + DeviceTruckTable.Column.TRUCKID + " text, "
+                + DeviceTruckTable.Column.NUMBERPLATE + " text, "
+                + DeviceTruckTable.Column.VEHICLENUMBER + " text "
+                + ")";
 //
         Log.d(TAG, "onCreate with SQL: " + sql);
         db.execSQL(sql);

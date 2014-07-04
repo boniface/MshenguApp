@@ -2,134 +2,137 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+    android:layout_height="fill_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/service"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/scanButton"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/service"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
 
-        android:textSize="20dp"
-        android:layout_margin="10dp"
-        android:padding="15dp"
-        android:text="Scan Toilet Unit"
-        style="@style/btnStyleGenoa"
-        android:background="@xml/mshengubutton"
-        />
+        <Button
+            android:id="@+id/scanButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-
-
-    <TextView   android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Unit ID:"
-        android:paddingLeft="10dp"
-        android:textSize="20dp"
-        />
-
-    <EditText android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:id="@+id/unitID"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:hint="Press scan button"
-        />
-
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <TableRow>
-
-            <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Waste Extraction"
-                android:textSize="20dp"
-                android:id="@+id/pump_out"
-                android:checked="false"/>
-
-        </TableRow>
-
-        <TableRow>
-
-            <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Clean Waste Tank and Toilet"
-                android:textSize="20dp"
-                android:id="@+id/suction_out"
-                android:checked="false"/>
-
-        </TableRow>
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:text="Scan Toilet Unit"
+            style="@style/btnStyleGenoa"
+            android:background="@xml/mshengubutton" />
 
 
-        <TableRow>
-
-            <CheckBox
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Chemical Re-Charge"
-                android:textSize="20dp"
-                android:id="@+id/scrub_floor"
-                android:checked="false"/>
-
-
-        </TableRow>
-
-
-    </TableLayout>
-
-
-    <TextView   android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Report Incident:"
-        android:paddingLeft="10dp"
-        android:textSize="20dp"
-        />
-
-    <EditText android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:id="@+id/reportIncident"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
-
-    <RadioGroup android:id="@+id/service_type"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <RadioButton android:id="@+id/service_start_id"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="START"/>
+            android:text="Unit ID:"
+            android:paddingLeft="10dp"
+            android:textSize="20dp" />
 
-        <RadioButton android:id="@+id/service_finish_id"
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:id="@+id/unitID"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:hint="Press scan button" />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Waste Extraction"
+                    android:textSize="20dp"
+                    android:id="@+id/pump_out"
+                    android:checked="false" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Clean Waste Tank and Toilet"
+                    android:textSize="20dp"
+                    android:id="@+id/suction_out"
+                    android:checked="false" />
+
+            </TableRow>
+
+
+            <TableRow>
+
+                <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chemical Re-Charge"
+                    android:textSize="20dp"
+                    android:id="@+id/scrub_floor"
+                    android:checked="false" />
+
+
+            </TableRow>
+
+
+        </TableLayout>
+
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FINISH"/>
-    </RadioGroup>
+            android:text="Report Incident:"
+            android:paddingLeft="10dp"
+            android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:id="@+id/reportIncident"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
 
-        android:textSize="20dp"
-        android:layout_margin="10dp"
-        android:padding="15dp"
-        android:background="@xml/mshengubutton"
-        style="@style/btnStyleGenoa"
+        <RadioGroup
+            android:id="@+id/service_type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        android:text="Submit Service"/>
+            <RadioButton
+                android:id="@+id/service_start_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="START" />
+
+            <RadioButton
+                android:id="@+id/service_finish_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FINISH" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:background="@xml/mshengubutton"
+            style="@style/btnStyleGenoa"
+
+            android:text="Submit Service" />
 
 
-</LinearLayout>
+    </LinearLayout>
 
 </ScrollView>

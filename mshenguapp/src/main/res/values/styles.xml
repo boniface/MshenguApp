@@ -17,6 +17,7 @@
         <item name="android:background">@drawable/custom_btn_black_pearl</item>
         <item name="android:padding">10dip</item>
     </style>
+
     <style name="btnStyleBeige" parent="@android:style/Widget.Button">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
@@ -29,6 +30,7 @@
         <item name="android:background">@drawable/custom_btn_beige</item>
         <item name="android:padding">10dip</item>
     </style>
+
     <style name="btnStyleGenoa" parent="@android:style/Widget.Button">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>

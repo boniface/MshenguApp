@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import zm.hashcode.android.mshengu.database.SiteDbHelper;
-import zm.hashcode.android.mshengu.database.TruckDbHelper;
 import zm.hashcode.android.mshengu.database.SitesTable;
 
 import static zm.hashcode.android.mshengu.database.SitesTable.SITE_TYPE_DIR;
@@ -66,13 +65,13 @@ public class SitesProvider extends ContentProvider {
         long rowId = db.insertWithOnConflict(SitesTable.TABLE, null,
                 values, SQLiteDatabase.CONFLICT_IGNORE);
         // Was insert successful?
-        if (rowId != -1) {
-            long id = values.getAsLong(SitesTable.Column.ID);
-            ret = ContentUris.withAppendedId(uri, id);
-            Log.d(TAG, "inserted uri: " + ret);
-            // Notify that data for this uri has changed
-            getContext().getContentResolver().notifyChange(uri, null);
-        }
+//        if (rowId != -1) {
+//            long id = values.getAsLong(SitesTable.Column.ID);
+//            ret = ContentUris.withAppendedId(uri, id);
+//            Log.d(TAG, "inserted uri: " + ret);
+//            // Notify that data for this uri has changed
+//            getContext().getContentResolver().notifyChange(uri, null);
+//        }
         return ret;
     }
 
@@ -140,7 +139,7 @@ public class SitesProvider extends ContentProvider {
     // SELECT username, message, created_at FROM status WHERE user='bob' ORDER
     // BY created_at DESC;
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         // Uisng SQLiteQueryBuilder instead of query() method
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
@@ -163,9 +162,9 @@ public class SitesProvider extends ContentProvider {
                 throw new IllegalArgumentException("Illegal uri: " + uri);
         }
 
-        String orderBy = (TextUtils.isEmpty(sortOrder)) ? SitesTable.DEFAULT_SORT : sortOrder;
+
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, orderBy);
+        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, SitesTable.DEFAULT_SORT);
         // register for uri changes
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         Log.d(TAG, "queried records: " + cursor.getCount());
@@ -173,7 +172,7 @@ public class SitesProvider extends ContentProvider {
     }
 
     private void checkColumns(String[] projection) {
-        String[] available = { SitesTable.Column.ID,SitesTable.Column.SITEID, SitesTable.Column.SITENAME};
+        String[] available = {SitesTable.Column.ID, SitesTable.Column.SITEID, SitesTable.Column.SITENAME};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
             HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));

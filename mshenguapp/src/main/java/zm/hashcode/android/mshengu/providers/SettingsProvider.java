@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import zm.hashcode.android.mshengu.database.SettingDbHelper;
-import zm.hashcode.android.mshengu.database.TruckDbHelper;
 import zm.hashcode.android.mshengu.database.SettingsTable;
 
 import static zm.hashcode.android.mshengu.database.SettingsTable.SETTING_TYPE_DIR;
@@ -63,16 +62,15 @@ public class SettingsProvider extends ContentProvider {
             throw new IllegalArgumentException("Illegal uri: " + uri);
         }
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        long rowId = db.insertWithOnConflict(SettingsTable.TABLE, null,
-                values, SQLiteDatabase.CONFLICT_IGNORE);
+        long rowId = db.insertWithOnConflict(SettingsTable.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         // Was insert successful?
-        if (rowId != -1) {
-            long id = values.getAsLong(SettingsTable.Column.ID);
-            ret = ContentUris.withAppendedId(uri, id);
-            Log.d(TAG, "inserted uri: " + ret);
-            // Notify that data for this uri has changed
-            getContext().getContentResolver().notifyChange(uri, null);
-        }
+//        if (rowId != -1) {
+//            long id = values.getAsLong(SettingsTable.Column.ID);
+//            ret = ContentUris.withAppendedId(uri, id);
+//            Log.d(TAG, "inserted uri: " + ret);
+//            // Notify that data for this uri has changed
+//            getContext().getContentResolver().notifyChange(uri, null);
+//        }
         return ret;
     }
 
@@ -140,7 +138,7 @@ public class SettingsProvider extends ContentProvider {
     // SELECT username, message, created_at FROM status WHERE user='bob' ORDER
     // BY created_at DESC;
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         // Uisng SQLiteQueryBuilder instead of query() method
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
@@ -163,9 +161,8 @@ public class SettingsProvider extends ContentProvider {
                 throw new IllegalArgumentException("Illegal uri: " + uri);
         }
 
-        String orderBy = (TextUtils.isEmpty(sortOrder)) ? SettingsTable.DEFAULT_SORT : sortOrder;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, orderBy);
+        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, SettingsTable.DEFAULT_SORT);
         // register for uri changes
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         Log.d(TAG, "queried records: " + cursor.getCount());
@@ -173,7 +170,7 @@ public class SettingsProvider extends ContentProvider {
     }
 
     private void checkColumns(String[] projection) {
-        String[] available = { SettingsTable.Column.ID,SettingsTable.Column.SITETYPE, SettingsTable.Column.SITEURL};
+        String[] available = {SettingsTable.Column.ID, SettingsTable.Column.SITETYPE, SettingsTable.Column.SITEURL};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
             HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));
@@ -183,4 +180,6 @@ public class SettingsProvider extends ContentProvider {
             }
         }
     }
+
+
 }

@@ -18,12 +18,12 @@ public class DeploymentTable {
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE);
     public static final int ALL_ROWS = 1;
     public static final int SINGLE_ROW = 2;
-    public static final String DEPLOYMENT_TYPE_ITEM ="vnd.android.cursor.item/vnd.zm.hashcode.android.mshengu.provider.deployment";
+    public static final String DEPLOYMENT_TYPE_ITEM = "vnd.android.cursor.item/vnd.zm.hashcode.android.mshengu.provider.deployment";
     public static final String DEPLOYMENT_TYPE_DIR = "vnd.android.cursor.dir/vnd.zm.hashcode.android.mshengu.provider.deployment";
     public static final String DEFAULT_SORT = Column.SITENAME + " DESC";
 
     public class Column {
-        public static final String ID= BaseColumns._ID;
+        public static final String ID = BaseColumns._ID;
         public static final String UNITID = "unitid";
         public static final String LATITUDE = "latitude";
         public static final String LONGITUDE = "longitude";

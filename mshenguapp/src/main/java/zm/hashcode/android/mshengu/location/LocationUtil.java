@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 
-
 /**
  * Created by hashcode on 2014/06/30.
  */

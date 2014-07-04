@@ -17,12 +17,14 @@ public class SiteDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = String
-                .format("create table %s (%s int primary key, %s text, %s text, %s int)",
-                        SitesTable.TABLE,
-                        SitesTable.Column.ID,
-                        SitesTable.Column.SITEID,
-                        SitesTable.Column.SITENAME);
+
+
+        String sql = " CREATE TABLE " + SitesTable.TABLE
+                + "( "
+                + SitesTable.Column.ID + " integer primary key autoincrement, "
+                + SitesTable.Column.SITEID + " text, "
+                + SitesTable.Column.SITENAME + " text "
+                + ")";
 //
         Log.d(TAG, "onCreate with SQL: " + sql);
         db.execSQL(sql);

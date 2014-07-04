@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <item
@@ -10,8 +9,7 @@
         android:title="@string/map"
         android:orderInCategory="1"
         android:showAsAction="always"
-        android:icon="@drawable/blue_maps"
-        />
+        android:icon="@drawable/blue_maps" />
 
     <item
         android:id="@+id/menu_settings"
@@ -19,7 +17,6 @@
         android:orderInCategory="2"
         android:showAsAction="always"
         android:icon="@drawable/settings"
-
 
 
         />

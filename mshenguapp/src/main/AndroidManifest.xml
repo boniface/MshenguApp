@@ -33,12 +33,10 @@
         </activity>
         <activity
             android:name=".Map"
-            android:label="@string/title_activity_map" >
-        </activity>
+            android:label="@string/title_activity_map" />
         <activity
             android:name=".Settings"
-            android:label="@string/title_activity_settings" >
-        </activity>
+            android:label="@string/title_activity_settings" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -49,70 +47,66 @@
 
         <service
             android:name=".services.TrucksIntentService"
-            android:exported="false" >
-        </service>
+            android:exported="false" />
         <service
             android:name=".services.LocationIntentService"
-            android:exported="false" >
-        </service>
+            android:exported="false" />
 
         <provider
             android:name=".providers.TrucksProvider"
             android:authorities="zm.hashcode.android.mshengu.providers.trucks"
             android:enabled="true"
-            android:exported="true" >
-        </provider>
+            android:exported="true" />
         <provider
             android:name=".providers.SitesProvider"
             android:authorities="zm.hashcode.android.mshengu.providers.sites"
             android:enabled="true"
-            android:exported="true" >
-        </provider>
+            android:exported="true" />
         <provider
             android:name=".providers.LocationsProvider"
             android:authorities="zm.hashcode.android.mshengu.providers.locations"
             android:enabled="true"
-            android:exported="true" >
-        </provider>
+            android:exported="true" />
         <provider
             android:name=".providers.SettingsProvider"
             android:authorities="zm.hashcode.android.mshengu.providers.settings"
             android:enabled="true"
-            android:exported="true" >
-        </provider>
+            android:exported="true" />
         <provider
             android:name=".providers.UsersProvider"
             android:authorities="zm.hashcode.android.mshengu.providers.users"
             android:enabled="true"
-            android:exported="true" >
-        </provider>
+            android:exported="true" />
         <provider
             android:name=".providers.DeployProvider"
             android:authorities="zm.hashcode.android.mshengu.providers.deploy"
             android:enabled="true"
-            android:exported="true" >
-        </provider>
+            android:exported="true" />
         <provider
             android:name=".providers.ServiceProvider"
             android:authorities="zm.hashcode.android.mshengu.providers.service"
             android:enabled="true"
-            android:exported="true" >
-        </provider>
+            android:exported="true" />
         <provider
             android:name=".providers.DeviceTruckProvider"
             android:authorities="zm.hashcode.android.mshengu.providers.devicetruck"
             android:enabled="true"
-            android:exported="true" >
-        </provider>
+            android:exported="true" />
 
         <activity
             android:name=".LoadData"
-            android:label="@string/title_activity_load_data" >
-        </activity>
+            android:label="@string/title_activity_load_data" />
         <activity
             android:name=".SetDevice"
-            android:label="@string/title_activity_set_device" >
-        </activity>
+            android:label="@string/title_activity_set_device" />
+
+        <service
+            android:name=".services.SitesIntentService"
+            android:exported="false" />
+        <service
+            android:name=".services.PostDateIntentService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>

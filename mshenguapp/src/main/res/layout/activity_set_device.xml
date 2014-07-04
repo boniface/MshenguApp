@@ -11,39 +11,14 @@
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        >
+        android:layout_height="fill_parent">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <AutoCompleteTextView android:id="@+id/setdata_truck_dropdown"
-                android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:layout_marginLeft="10dp"
-                android:hint="Select Truck"
-                />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                style="@style/btnStyleGenoa"
-                android:textSize="20dp"
-                android:layout_margin="10dp"
-                android:padding="15dp"
-                android:id="@+id/setdata_set_truck_button"
-                android:background="@xml/mshengubutton"
-                android:text="Load Trucks"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_gravity="center_horizontal"
-                android:textSize="20dp"
-                android:id="@+id/setdata_truck_set_message"
-                />
+            android:layout_height="match_parent"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
 
             <Spinner
                 android:id="@+id/setdata_set_site_dropdown"
@@ -59,7 +34,7 @@
                 android:padding="15dp"
                 android:id="@+id/setdata_set_site_button"
                 android:background="@xml/mshengubutton"
-                android:text="Set Device Site"/>
+                android:text="Set Device URL" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,8 +42,54 @@
                 android:padding="10dp"
                 android:layout_gravity="center_horizontal"
                 android:textSize="20dp"
-                android:id="@+id/setdata_site_message"
-                />
+                android:id="@+id/setdata_site_message" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/btnStyleGenoa"
+                android:textSize="20dp"
+                android:layout_margin="10dp"
+                android:padding="15dp"
+                android:id="@+id/setdata_load_trucks_button"
+                android:background="@xml/mshengubutton"
+                android:text="Load Trucks" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:id="@+id/setdata_truck_message" />
+
+
+            <AutoCompleteTextView
+                android:id="@+id/setdata_truck_dropdown"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:hint="Select Truck" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/btnStyleGenoa"
+                android:textSize="20dp"
+                android:layout_margin="10dp"
+                android:padding="15dp"
+                android:id="@+id/setdata_set_truck_button"
+                android:background="@xml/mshengubutton"
+                android:text="Set Device Truck" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:id="@+id/setdata_truck_set_message" />
+
 
             <Button
                 android:layout_width="fill_parent"
@@ -79,7 +100,7 @@
                 android:padding="15dp"
                 android:id="@+id/setdata_settings_button"
                 android:background="@xml/rounded_rect"
-                android:text="Settings"/>
+                android:text="Settings" />
 
         </LinearLayout>
     </ScrollView>

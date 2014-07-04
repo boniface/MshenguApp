@@ -19,7 +19,7 @@ import zm.hashcode.android.mshengu.database.DeploymentTable;
 
 
 public class DeployProvider extends ContentProvider {
-    
+
     public DeployProvider() {
     }
 
@@ -112,7 +112,7 @@ public class DeployProvider extends ContentProvider {
         String where;
         switch (sURIMatcher.match(uri)) {
             case DeploymentTable.ALL_ROWS:
-// so we count deleted rows
+                // so we count deleted rows
                 where = (selection == null) ? "1" : selection;
                 break;
             case DeploymentTable.SINGLE_ROW:
@@ -127,6 +127,7 @@ public class DeployProvider extends ContentProvider {
                 throw new IllegalArgumentException("Illegal uri: " + uri);
         }
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+
         int ret = db.delete(DeploymentTable.TABLE, where, selectionArgs);
         if (ret > 0) {
             // Notify that data for this uri has changed
@@ -139,7 +140,7 @@ public class DeployProvider extends ContentProvider {
     // SELECT username, message, created_at FROM status WHERE user='bob' ORDER
     // BY created_at DESC;
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         // Uisng SQLiteQueryBuilder instead of query() method
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
@@ -162,9 +163,9 @@ public class DeployProvider extends ContentProvider {
                 throw new IllegalArgumentException("Illegal uri: " + uri);
         }
 
-        String orderBy = (TextUtils.isEmpty(sortOrder)) ? DeploymentTable.DEFAULT_SORT : sortOrder;
+
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, orderBy);
+        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, DeploymentTable.DEFAULT_SORT);
         // register for uri changes
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         Log.d(TAG, "queried records: " + cursor.getCount());
@@ -177,7 +178,7 @@ public class DeployProvider extends ContentProvider {
                 DeploymentTable.Column.LATITUDE,
                 DeploymentTable.Column.LONGITUDE,
                 DeploymentTable.Column.SITENAME,
-                DeploymentTable.Column.UNITID };
+                DeploymentTable.Column.UNITID};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
             HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));

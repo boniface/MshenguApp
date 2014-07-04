@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by boniface on 2013/12/18.
  */
-public class MobileResponseMessage implements Serializable{
+public class MobileResponseMessage implements Serializable {
     private String message;
 
     public String getMessage() {

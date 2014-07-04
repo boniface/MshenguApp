@@ -17,13 +17,14 @@ public class LocationDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = String
-                .format("create table %s (%s int primary key, %s text, %s text, %s int)",
-                        LocationsTable.TABLE,
-                        LocationsTable.Column.ID,
-                        LocationsTable.Column.LATITUDE,
-                        LocationsTable.Column.LONGITUDE,
-                        LocationsTable.Column.DATETIME);
+
+        String sql = " CREATE TABLE " + LocationsTable.TABLE
+                + "( "
+                + LocationsTable.Column.ID + " integer primary key autoincrement, "
+                + LocationsTable.Column.LATITUDE + " text, "
+                + LocationsTable.Column.LONGITUDE + " text, "
+                + LocationsTable.Column.DATETIME + " text "
+                + ")";
 //
         Log.d(TAG, "onCreate with SQL: " + sql);
         db.execSQL(sql);

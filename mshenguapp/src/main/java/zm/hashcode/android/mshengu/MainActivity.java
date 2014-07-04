@@ -2,10 +2,10 @@ package zm.hashcode.android.mshengu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -17,14 +17,12 @@ import com.viewpagerindicator.TitlePageIndicator;
 import zm.hashcode.android.mshengu.fragment.DeploymentFragment;
 import zm.hashcode.android.mshengu.fragment.GeoPlotFragment;
 import zm.hashcode.android.mshengu.fragment.ServiceFragment;
-import zm.hashcode.android.mshengu.R;
 
 
 public class MainActivity extends FragmentActivity {
     private DeploymentFragment deploymentFragment;
     private GeoPlotFragment geoplotFragment;
     private ServiceFragment serviceFragment;
-
 
 
     @Override
@@ -34,15 +32,15 @@ public class MainActivity extends FragmentActivity {
 
         //Swapping fragments-start
         FragmentPagerAdapter adapter = new MainFragmentAdapter(getSupportFragmentManager());
-        ViewPager pager = (ViewPager)findViewById(R.id.pager);
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
-        TitlePageIndicator indicator = (TitlePageIndicator)findViewById(R.id.indicator);
+        TitlePageIndicator indicator = (TitlePageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
 
-        FragmentManager manager= getSupportFragmentManager();
-        serviceFragment=(ServiceFragment) manager.findFragmentById(R.id.service);
-        deploymentFragment=(DeploymentFragment) manager.findFragmentById(R.id.deployment);
-        geoplotFragment=(GeoPlotFragment) manager.findFragmentById(R.id.geoplot);
+        FragmentManager manager = getSupportFragmentManager();
+        serviceFragment = (ServiceFragment) manager.findFragmentById(R.id.service);
+        deploymentFragment = (DeploymentFragment) manager.findFragmentById(R.id.deployment);
+        geoplotFragment = (GeoPlotFragment) manager.findFragmentById(R.id.geoplot);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -68,16 +66,15 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.map:
-                Intent intent1=new Intent(this, Map.class);
+                Intent intent1 = new Intent(this, Map.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent1);
                 return true;
 
             case R.id.menu_settings:
-                Intent intent=new Intent(this, Settings.class);
+                Intent intent = new Intent(this, Settings.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return true;

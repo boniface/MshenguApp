@@ -7,48 +7,41 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-
-import zm.hashcode.android.mshengu.R;
-import zm.hashcode.android.mshengu.services.TrucksIntentService;
+import zm.hashcode.android.mshengu.services.SitesIntentService;
 
 
 public class Settings extends Activity {
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        Button homeButton=(Button)findViewById(R.id.settings_home_button);
-        Button loadDataDeviceButton=(Button)findViewById(R.id.settings_load_device_data_Button);
-        Button setDeviceData=(Button)findViewById(R.id.settings_set_data_device);
-        final TextView setDataStatus = (TextView)findViewById(R.id.settings_set_data_status);
-        final TextView loadDataStatus= (TextView)findViewById(R.id.settings_load_data_status);
+        Button homeButton = (Button) findViewById(R.id.settings_home_button);
+        Button loadServiceSitesButton = (Button) findViewById(R.id.settings_load_service_sites_button);
+        Button setDeviceData = (Button) findViewById(R.id.settings_set_data_device);
+        final TextView setDataStatus = (TextView) findViewById(R.id.settings_set_data_status);
+        final TextView loadDataStatus = (TextView) findViewById(R.id.settings_load_data_status);
         homeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-//                TrucksIntentService.startActionLoadTrucks(v.getContext());
-                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+//
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
 
             }
-        } );
+        });
 
 
-        loadDataDeviceButton.setOnClickListener(new View.OnClickListener() {
+        loadServiceSitesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),LoadData.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                SitesIntentService.startActionLoadSites(view.getContext());
                 loadDataStatus.setText("");
 
 
@@ -58,7 +51,7 @@ public class Settings extends Activity {
         setDeviceData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),SetDevice.class);
+                Intent intent = new Intent(getApplicationContext(), SetDevice.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
@@ -69,8 +62,7 @@ public class Settings extends Activity {
 
     }
 
-    private void DisplayToast(String msg)
-    {
+    private void DisplayToast(String msg) {
         Toast.makeText(getBaseContext(), msg,
                 Toast.LENGTH_SHORT).show();
     }

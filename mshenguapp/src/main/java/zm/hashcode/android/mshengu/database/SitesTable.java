@@ -18,12 +18,12 @@ public class SitesTable {
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE);
     public static final int ALL_ROWS = 1;
     public static final int SINGLE_ROW = 2;
-    public static final String SITE_TYPE_ITEM ="vnd.android.cursor.item/vnd.zm.hashcode.android.mshengu.provider.site";
+    public static final String SITE_TYPE_ITEM = "vnd.android.cursor.item/vnd.zm.hashcode.android.mshengu.provider.site";
     public static final String SITE_TYPE_DIR = "vnd.android.cursor.dir/vnd.zm.hashcode.android.mshengu.provider.site";
     public static final String DEFAULT_SORT = Column.SITENAME + " DESC";
 
     public class Column {
-        public static final String ID= BaseColumns._ID;
+        public static final String ID = BaseColumns._ID;
         public static final String SITEID = "siteid";
         public static final String SITENAME = "sitename";
 

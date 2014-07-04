@@ -17,19 +17,18 @@ public class ServicingDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = String
-                .format("create table %s (%s int primary key, %s text, %s text, %s int)",
-                        ServicingTable.TABLE,
-                        ServicingTable.Column.ID,
-                        ServicingTable.Column.ACTION,
-                        ServicingTable.Column.CHEMICALRECHARGE,
-                        ServicingTable.Column.CLEANWASTE,
-                        ServicingTable.Column.INCIDENT,
-                        ServicingTable.Column.LATITITUDE,
-                        ServicingTable.Column.LONGITUDE,
-                        ServicingTable.Column.UNITID,
-                        ServicingTable.Column.WATEREXTRACTION
-                );
+        String sql = " CREATE TABLE " + ServicingTable.TABLE
+                + "( "
+                + ServicingTable.Column.ID + " integer primary key autoincrement, "
+                + ServicingTable.Column.ACTION + " text, "
+                + ServicingTable.Column.CHEMICALRECHARGE + " text, "
+                + ServicingTable.Column.CLEANWASTE + " text, "
+                + ServicingTable.Column.INCIDENT + " text, "
+                + ServicingTable.Column.LATITITUDE + " text, "
+                + ServicingTable.Column.LONGITUDE + " text, "
+                + ServicingTable.Column.UNITID + " text, "
+                + ServicingTable.Column.WATEREXTRACTION + " text "
+                + ")";
 //
         Log.d(TAG, "onCreate with SQL: " + sql);
         db.execSQL(sql);

@@ -14,14 +14,15 @@ import android.util.Log;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import zm.hashcode.android.mshengu.database.TruckTable;
 import zm.hashcode.android.mshengu.database.TruckDbHelper;
+import zm.hashcode.android.mshengu.database.TruckTable;
 
 import static zm.hashcode.android.mshengu.database.TruckTable.TRUCK_TYPE_DIR;
 
 public class TrucksProvider extends ContentProvider {
     public TrucksProvider() {
     }
+
     private static final String TAG = TrucksProvider.class.getSimpleName();
     private TruckDbHelper dbHelper;
 
@@ -61,16 +62,16 @@ public class TrucksProvider extends ContentProvider {
             throw new IllegalArgumentException("Illegal uri: " + uri);
         }
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        long rowId = db.insertWithOnConflict(TruckTable.TABLE, null,
-                values, SQLiteDatabase.CONFLICT_IGNORE);
+
+        long rowId = db.insertWithOnConflict(TruckTable.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         // Was insert successful?
-        if (rowId != -1) {
-            long id = values.getAsLong(TruckTable.Column.ID);
-            ret = ContentUris.withAppendedId(uri, id);
-            Log.d(TAG, "inserted uri: " + ret);
-            // Notify that data for this uri has changed
-            getContext().getContentResolver().notifyChange(uri, null);
-        }
+//        if (rowId != -1) {
+//            long id = values.getAsLong(TruckTable.Column.ID);
+//            ret = ContentUris.withAppendedId(uri, id);
+//            Log.d(TAG, "inserted uri: " + ret);
+//            // Notify that data for this uri has changed
+//            getContext().getContentResolver().notifyChange(uri, null);
+//        }
         return ret;
     }
 
@@ -138,7 +139,7 @@ public class TrucksProvider extends ContentProvider {
     // SELECT username, message, created_at FROM status WHERE user='bob' ORDER
     // BY created_at DESC;
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         // Uisng SQLiteQueryBuilder instead of query() method
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
@@ -171,7 +172,7 @@ public class TrucksProvider extends ContentProvider {
     }
 
     private void checkColumns(String[] projection) {
-        String[] available = { TruckTable.Column.ID,TruckTable.Column.TRUCKID, TruckTable.Column.NUMBERPLATE, TruckTable.Column.VEHICLENUMBER};
+        String[] available = {TruckTable.Column.ID, TruckTable.Column.TRUCKID, TruckTable.Column.NUMBERPLATE, TruckTable.Column.VEHICLENUMBER};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
             HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));
