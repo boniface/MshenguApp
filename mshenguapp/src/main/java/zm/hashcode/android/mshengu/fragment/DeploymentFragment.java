@@ -1,8 +1,6 @@
 package zm.hashcode.android.mshengu.fragment;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.location.Location;
 import android.os.Bundle;
@@ -24,7 +22,7 @@ import java.util.List;
 import zm.hashcode.android.mshengu.R;
 import zm.hashcode.android.mshengu.database.SitesTable;
 import zm.hashcode.android.mshengu.location.LocationUtil;
-
+import zm.hashcode.android.mshengu.services.PostDateIntentService;
 
 
 public class DeploymentFragment extends Fragment {
@@ -63,6 +61,23 @@ public class DeploymentFragment extends Fragment {
 
         deployButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                EditText unitIdDeployment = (EditText) getView().findViewById(R.id.unitIdDeployment);
+                EditText  lat = (EditText) getView().findViewById(R.id.latDeployment);
+                EditText lon = (EditText) getView().findViewById(R.id.lonDeployment);
+
+                Bundle bundle=new Bundle();
+
+                bundle.putString("unit_id",unitIdDeployment.getText().toString());
+                bundle.putString("latitude",lat.getText().toString());
+                bundle.putString("longitude",lon.getText().toString());
+                bundle.putString("site",actv.getText().toString());
+                PostDateIntentService.startActionDeploy(v.getContext(),bundle);
+
+                unitIdDeployment.setText("");
+                lat.setText("");
+                lon.setText("");
+                actv.setText("");
+
 
 
             }
@@ -87,7 +102,7 @@ public class DeploymentFragment extends Fragment {
 
     public void autoCompleteTextBox() {
         Context ctx = getActivity().getApplicationContext();
-        AutoCompleteTextView actv = (AutoCompleteTextView) v.findViewById(R.id.actv_site);
+        actv = (AutoCompleteTextView) v.findViewById(R.id.actv_site);
         List<String> sites = new ArrayList<String>();
 
         Cursor cursor;
@@ -102,7 +117,7 @@ public class DeploymentFragment extends Fragment {
             }
             cursor.close();
         }
-        actv.setAdapter(new ArrayAdapter<String>(ctx, R.layout.list_detail, sites));
+        actv.setAdapter(new ArrayAdapter<String>(ctx, R.layout.sites_list, sites));
 
     }
 

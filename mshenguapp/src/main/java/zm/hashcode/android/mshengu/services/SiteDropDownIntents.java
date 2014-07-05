@@ -44,11 +44,7 @@ public class SiteDropDownIntents extends IntentService {
 
 
 
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction(DeploymentFragment.ResponseReceiver.ACTION_RESP);
-        broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        broadcastIntent.putStringArrayListExtra(RESULTS, results);
-        sendBroadcast(broadcastIntent);
+
     }
 
 }

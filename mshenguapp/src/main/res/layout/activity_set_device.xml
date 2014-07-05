@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:layout_marginLeft="10dp"
-                android:hint="Select Truck" />
+                android:hint="Enter Truck Number Plate" />
 
             <Button
                 android:layout_width="fill_parent"

@@ -35,7 +35,22 @@
                 android:padding="10dp"
                 android:layout_gravity="center_horizontal"
                 android:textSize="20dp"
-                android:id="@+id/settings_set_data_status" />
+                android:id="@+id/settings_set_url_status" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:id="@+id/settings_load_truck_status" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:id="@+id/settings_set_truck_status" />
 
             <Button
                 android:layout_width="fill_parent"
@@ -54,7 +69,7 @@
                 android:padding="10dp"
                 android:layout_gravity="center_horizontal"
                 android:textSize="20dp"
-                android:id="@+id/settings_load_data_status" />
+                android:id="@+id/settings_load_sites_status" />
 
 
             <Button

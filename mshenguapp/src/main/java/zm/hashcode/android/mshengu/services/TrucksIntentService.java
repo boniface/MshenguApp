@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import zm.hashcode.android.mshengu.connection.Connection;
+import zm.hashcode.android.mshengu.database.DeviceTruckTable;
 import zm.hashcode.android.mshengu.database.SettingsTable;
 import zm.hashcode.android.mshengu.database.TruckTable;
 import zm.hashcode.android.mshengu.resources.TruckResources;
@@ -27,10 +30,10 @@ public class TrucksIntentService extends IntentService {
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String TAG = "Trucks Service";
     private static final String ACTION_LOAD_TRUCKS = "zm.hashcode.android.mshengu.services.action.LOADTRUCKS";
-    private static final String ACTION_BAZ = "zm.hashcode.android.mshengu.services.action.BAZ";
+    private static final String ACTION_SET_DEVICE_TRACK = "zm.hashcode.android.mshengu.services.action.SETDEVICETRUCK";
 
     // TODO: Rename parameters
-    private static final String EXTRA_PARAM1 = "zm.hashcode.android.mshengu.services.extra.PARAM1";
+    private static final String TRUCK_NUMBERPLATE = "zm.hashcode.android.mshengu.services.extra.NUMBERPLATE";
     private static final String EXTRA_PARAM2 = "zm.hashcode.android.mshengu.services.extra.PARAM2";
 
     /**
@@ -53,11 +56,10 @@ public class TrucksIntentService extends IntentService {
      * @see IntentService
      */
     // TODO: Customize helper method
-    public static void startActionBaz(Context context, String param1, String param2) {
+    public static void startActionSetDeviceTruck(Context context, String numberPlate) {
         Intent intent = new Intent(context, TrucksIntentService.class);
-        intent.setAction(ACTION_BAZ);
-        intent.putExtra(EXTRA_PARAM1, param1);
-        intent.putExtra(EXTRA_PARAM2, param2);
+        intent.setAction(ACTION_SET_DEVICE_TRACK);
+        intent.putExtra(TRUCK_NUMBERPLATE, numberPlate);
         context.startService(intent);
     }
 
@@ -77,10 +79,10 @@ public class TrucksIntentService extends IntentService {
             final String action = intent.getAction();
             if (ACTION_LOAD_TRUCKS.equals(action)) {
                 handleActionLoadTrucks();
-            } else if (ACTION_BAZ.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-                handleActionBaz(param1, param2);
+            } else if (ACTION_SET_DEVICE_TRACK.equals(action)) {
+                final String numberPlate = intent.getStringExtra(TRUCK_NUMBERPLATE);
+//                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
+                handleActionSetDeviceTruck(numberPlate);
             }
         }
     }
@@ -97,7 +99,7 @@ public class TrucksIntentService extends IntentService {
      */
     private void handleActionLoadTrucks() {
         Cursor cursor;
-        cursor = getContentResolver().query(SettingsTable.CONTENT_URI, null, null, null, TruckTable.DEFAULT_SORT);
+        cursor = getContentResolver().query(SettingsTable.CONTENT_URI, null, null, null, SettingsTable.DEFAULT_SORT);
         String url = "";
         if (cursor.moveToFirst()) {
             {
@@ -119,53 +121,60 @@ public class TrucksIntentService extends IntentService {
             getContentResolver().insert(TruckTable.CONTENT_URI, values);
 
         }
-
-        System.out.println(" NOTIFY USER AT THIS POINT");
-
-
-//        ContentValues values = new ContentValues();
-//        values.put(TruckTable.Column.ID,"123456");
-//        values.put(TruckTable.Column.NUMBERPLATE,"CY 123 XYZ");
-//        values.put(TruckTable.Column.TRUCKID,"123456");
-//        values.put(TruckTable.Column.VEHICLENUMBER,"123456");
-//
-//        Uri uri = getContentResolver().insert(TruckTable.CONTENT_URI, values);
-//
-//        cursor = getContentResolver().query(TruckTable.CONTENT_URI,null,null,null,TruckTable.DEFAULT_SORT);
-//
-////        Uri res = Uri.parse()
-//        if(cursor.moveToFirst())
-//        {
-//            do{
-//
-//               str=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.ID));
-//               truckid=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.TRUCKID));
-//               vn=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.VEHICLENUMBER));
-//               np=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.NUMBERPLATE));
-//
-//            }while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//
-//
-//
-//
-//
-//        System.out.println( " THE OUPTUT IS " +str);
-//        System.out.println( " THE OUPTUT IS " +truckid);
-//        System.out.println( " THE OUPTUT IS " +np);
-//        System.out.println( " THE OUPTUT IS " +vn);
-//
-
-
     }
 
     /**
      * Handle action Baz in the provided background thread with the provided
      * parameters.
      */
-    private void handleActionBaz(String param1, String param2) {
-        // TODO: Handle action Baz
-        throw new UnsupportedOperationException("Not yet implemented");
+    private void handleActionSetDeviceTruck(String numberPlate) {
+        Map<String, String> truck = getTruck(numberPlate);
+        System.out.println(" Number Plate "+truck.get("numberPlate"));
+        System.out.println("Truck ID "+truck.get("truckId"));
+        System.out.println("Vehicle Number "+truck.get("vehicleNumber"));
+        Cursor cursor = null;
+        cursor = getContentResolver().query(DeviceTruckTable.CONTENT_URI, null, null, null, DeviceTruckTable.DEFAULT_SORT);
+
+        if (cursor.moveToFirst()) {
+            // WORK ON DELETE
+            getContentResolver().delete(DeviceTruckTable.CONTENT_URI, null, null);
+
+            ContentValues values = new ContentValues();
+            values.put(DeviceTruckTable.Column.NUMBERPLATE,truck.get("numberPlate"));
+            values.put(DeviceTruckTable.Column.TRUCKID, truck.get("truckId"));
+            values.put(DeviceTruckTable.Column.VEHICLENUMBER, truck.get("vehicleNumber"));
+
+            getContentResolver().insert(DeviceTruckTable.CONTENT_URI, values);
+
+        } else {
+            ContentValues values = new ContentValues();
+            values.put(DeviceTruckTable.Column.NUMBERPLATE,truck.get("numberPlate"));
+            values.put(DeviceTruckTable.Column.TRUCKID, truck.get("truckId"));
+            values.put(DeviceTruckTable.Column.VEHICLENUMBER, truck.get("vehicleNumber"));
+
+            getContentResolver().insert(DeviceTruckTable.CONTENT_URI, values);
+
+        }
+    }
+
+    private Map<String, String> getTruck(String numberPlate) {
+        Map<String, String> truck = new HashMap<String,String>();
+        Cursor cursor;
+        cursor = getContentResolver().query(TruckTable.CONTENT_URI,null,null,null,TruckTable.DEFAULT_SORT);
+        if(cursor.moveToFirst()){
+            do{
+                np=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.NUMBERPLATE));
+                if (numberPlate.equalsIgnoreCase(np)){
+                    truckid=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.TRUCKID));
+                    truck.put("truckId",truckid);
+                    vn=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.VEHICLENUMBER));
+                    truck.put("vehicleNumber",vn);
+
+                    truck.put("numberPlate",np);
+                }
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return truck;
     }
 }

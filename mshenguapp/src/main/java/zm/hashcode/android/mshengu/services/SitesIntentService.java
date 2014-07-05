@@ -95,7 +95,6 @@ public class SitesIntentService extends IntentService {
     }
 
     private void handleActionGetLocalSites() {
-        System.out.println(" THIS INTENT HAS BEEN CALLED");
         final String RESULTS = "results";
 
         Cursor cursor;
@@ -111,12 +110,7 @@ public class SitesIntentService extends IntentService {
             cursor.close();
         }
 
-        System.out.println(" THE SIZE OF THE RESULTS IS "+ results.size());
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction(DeploymentFragment.ResponseReceiver.ACTION_RESP);
-        broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        broadcastIntent.putStringArrayListExtra(RESULTS, results);
-        sendBroadcast(broadcastIntent);
+
 
     }
 
@@ -132,14 +126,12 @@ public class SitesIntentService extends IntentService {
             // WORK ON DELETE
             getContentResolver().delete(SettingsTable.CONTENT_URI, null, null);
             ContentValues values = new ContentValues();
-//            values.put(SettingsTable.Column.ID,"hello");
             values.put(SettingsTable.Column.SITEURL, siteurl);
             values.put(SettingsTable.Column.SITETYPE, sitetype);
             getContentResolver().insert(SettingsTable.CONTENT_URI, values);
 
         } else {
             ContentValues values = new ContentValues();
-//            values.put(SettingsTable.Column.ID,"hello");
             values.put(SettingsTable.Column.SITEURL, siteurl);
             values.put(SettingsTable.Column.SITETYPE, sitetype);
             getContentResolver().insert(SettingsTable.CONTENT_URI, values);
@@ -154,7 +146,6 @@ public class SitesIntentService extends IntentService {
      */
     private void handleActionLoadSites() {
         Cursor cursor;
-        //System.out.println( " THE LOAD SITES IS CALLED HERE !!!!!!");
         cursor = getContentResolver().query(SettingsTable.CONTENT_URI, null, null, null, SettingsTable.DEFAULT_SORT);
         String url = "";
         if (cursor.moveToFirst()) {
@@ -166,8 +157,6 @@ public class SitesIntentService extends IntentService {
             }
             cursor.close();
         }
-
-     System.out.println(" THE URL IS IN INTENET " + url);
 
      List<SiteResource> sites =  new Connection(url).getSites(2);
 
