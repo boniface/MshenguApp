@@ -7,43 +7,29 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import zm.hashcode.android.mshengu.connection.Connection;
 import zm.hashcode.android.mshengu.connection.MobileResponseMessage;
 import zm.hashcode.android.mshengu.database.SettingsTable;
 import zm.hashcode.android.mshengu.resources.UnitDeliveryResource;
+import zm.hashcode.android.mshengu.resources.UnitServiceResource;
 
-/**
- * An {@link IntentService} subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
- * <p>
- * TODO: Customize class - update intent actions, extra parameters and static
- * helper methods.
- */
+
 public class PostDateIntentService extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
+
     private static final String ACTION_DEPLOY = "zm.hashcode.android.mshengu.services.action.DEPLOY";
     private static final String ACTION_SERVICE = "zm.hashcode.android.mshengu.services.action.SERVICE";
 
-    // TODO: Rename parameters
     private static final String EXTRA_UNIT = "zm.hashcode.android.mshengu.services.extra.UNIT";
     private static final String EXTRA_LAT = "zm.hashcode.android.mshengu.services.extra.LAT";
     private static final String EXTRA_LONG = "zm.hashcode.android.mshengu.services.extra.LONG";
     private static final String EXTRA_SITE = "zm.hashcode.android.mshengu.services.extra.SITE";
-//    private static final String EXTRA_PARAM2 = "zm.hashcode.android.mshengu.services.extra.PARAM2";
-    private static final String EXTRA_PARAM2 = "zm.hashcode.android.mshengu.services.extra.PARAM2";
+    Boolean pump_out_bool, wash_bucket_bool, suction_out_bool, rech_bucket_bool, scrub_floor_bool, clean_peri_bool;
 
-    /**
-     * Starts this service to perform action Foo with the given parameters. If
-     * the service is already performing a task this action will be queued.
-     *   bundle.putString("unit_id",unitIdDeployment.getText().toString());
-     bundle.putString("latitude",lat.getText().toString());
-     bundle.putString("longitude",lon.getText().toString());
-     bundle.putString("site",actv.getText().toString());
-     * @see IntentService
-     */
-    // TODO: Customize helper method
+
+
     public static void startActionDeploy(Context context, Bundle data) {
         Intent intent = new Intent(context, PostDateIntentService.class);
         intent.setAction(ACTION_DEPLOY);
@@ -56,19 +42,11 @@ public class PostDateIntentService extends IntentService {
 
     }
 
-    /**
-     * Starts this service to perform action Baz with the given parameters. If
-     * the service is already performing a task this action will be queued.
-     *
-     * @see IntentService
-     */
-    // TODO: Customize helper method
+
     public static void startActionService(Context context, Bundle data) {
         Intent intent = new Intent(context, PostDateIntentService.class);
         intent.setAction(ACTION_SERVICE);
-//        intent.putExtra(EXTRA_PARAM1, data.getString(""));
-//        intent.putExtra(EXTRA_PARAM2, param2);
-//        intent.putExtra(EXTRA_PARAM2, param2);
+        intent.putExtras(data);
         context.startService(intent);
     }
 
@@ -85,19 +63,15 @@ public class PostDateIntentService extends IntentService {
                 final String latitude = intent.getStringExtra(EXTRA_LAT);
                 final String longitude = intent.getStringExtra(EXTRA_LONG);
                 final String site = intent.getStringExtra(EXTRA_SITE);
-                handleActionDeploy(unit, latitude,longitude,site);
+                handleActionDeploy(unit, latitude, longitude, site);
             } else if (ACTION_SERVICE.equals(action)) {
-//                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-//                handleActionBaz(param1, param2);
+                final Bundle data = intent.getExtras();
+                handleActionService(data);
             }
         }
     }
 
-    /**
-     * Handle action Foo in the provided background thread with the provided
-     * parameters.
-     */
+
     private void handleActionDeploy(String unit, String latitude, String longitude, String site) {
         String url = getUrl();
         final UnitDeliveryResource unitDeliveryResource = new UnitDeliveryResource();
@@ -107,17 +81,65 @@ public class PostDateIntentService extends IntentService {
         unitDeliveryResource.setSiteId(site);
         unitDeliveryResource.setDate(new Date().toString());
         MobileResponseMessage message = new Connection(url).postDeployment(unitDeliveryResource);
-        System.out.println("The Message about the POST IS "+message.getMessage());
-
+        System.out.println(" THE RETURNED MESSAGE IS "+message);
     }
 
-    /**
-     * Handle action Baz in the provided background thread with the provided
-     * parameters.
-     */
-    private void handleActionBaz(String param1, String param2) {
-        // TODO: Handle action Baz
-        throw new UnsupportedOperationException("Not yet implemented");
+
+    private void handleActionService(Bundle data) {
+        String url = getUrl();
+
+        final UnitServiceResource unitServiceResource = new UnitServiceResource();
+        unitServiceResource.setLatitude(data.getString("latitude"));
+        unitServiceResource.setLongitude(data.getString("latitude"));
+        unitServiceResource.setUnitId(data.getString("unit_id"));
+        unitServiceResource.setServiceType(data.getString("serviceType"));
+        Map<String, Boolean> tasks = new HashMap<String, Boolean>();
+
+        if (data.getString("pump_out").equals("yes")) {
+            pump_out_bool = true;
+        } else {
+            pump_out_bool = false;
+        }
+        if (data.getString("wash_bucket").equals("yes")) {
+            wash_bucket_bool = true;
+        } else {
+            wash_bucket_bool = false;
+        }
+
+        if (data.getString("suction_out").equals("yes")) {
+            suction_out_bool = true;
+        } else {
+            suction_out_bool = false;
+        }
+        if (data.getString("scrub_floor").equals("yes")) {
+            scrub_floor_bool = true;
+        } else {
+            scrub_floor_bool = false;
+        }
+        if (data.getString("recharge_bucket").equals("yes")) {
+            rech_bucket_bool = true;
+        } else {
+            rech_bucket_bool = false;
+        }
+        if (data.getString("clean_perimeter").equals("yes")) {
+            clean_peri_bool = true;
+        } else {
+            clean_peri_bool = false;
+        }
+
+        tasks.put("pumpOut", pump_out_bool);
+        tasks.put("washBucket", wash_bucket_bool);
+        tasks.put("suctionOut", suction_out_bool);
+        tasks.put("scrubFloor", scrub_floor_bool);
+        tasks.put("rechargeBacket", rech_bucket_bool);
+        tasks.put("cleanPerimeter", clean_peri_bool);
+
+        unitServiceResource.setServices(tasks);
+        unitServiceResource.setIncident(data.getString("report_incident"));
+        unitServiceResource.setDate(data.getString("date"));
+
+        MobileResponseMessage message = new Connection(url).postUnitService(unitServiceResource);
+
     }
 
     private String getUrl(){

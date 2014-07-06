@@ -14,6 +14,7 @@ import java.util.Map;
 import zm.hashcode.android.mshengu.connection.Connection;
 import zm.hashcode.android.mshengu.database.DeviceTruckTable;
 import zm.hashcode.android.mshengu.database.SettingsTable;
+import zm.hashcode.android.mshengu.database.SitesTable;
 import zm.hashcode.android.mshengu.database.TruckTable;
 import zm.hashcode.android.mshengu.resources.TruckResources;
 
@@ -98,6 +99,8 @@ public class TrucksIntentService extends IntentService {
      * parameters.
      */
     private void handleActionLoadTrucks() {
+        Cursor trucksCursor = null;
+        trucksCursor = getContentResolver().query(TruckTable.CONTENT_URI, null, null, null, TruckTable.DEFAULT_SORT);
         Cursor cursor;
         cursor = getContentResolver().query(SettingsTable.CONTENT_URI, null, null, null, SettingsTable.DEFAULT_SORT);
         String url = "";
@@ -111,16 +114,27 @@ public class TrucksIntentService extends IntentService {
             cursor.close();
         }
         List<TruckResources> trucks = new Connection(url).getTrucks();
-        int i = 0;
-        for (TruckResources truck : trucks) {
-            ContentValues values = new ContentValues();
-            values.put(TruckTable.Column.NUMBERPLATE, truck.getNumberPlate());
-            values.put(TruckTable.Column.TRUCKID, truck.getId());
-            values.put(TruckTable.Column.VEHICLENUMBER, truck.getVehicleNumber());
 
-            getContentResolver().insert(TruckTable.CONTENT_URI, values);
-
+        if (trucksCursor.moveToFirst()) {
+            getContentResolver().delete(TruckTable.CONTENT_URI, null, null);
+            for (TruckResources truck : trucks) {
+                ContentValues values = new ContentValues();
+                values.put(TruckTable.Column.NUMBERPLATE, truck.getNumberPlate());
+                values.put(TruckTable.Column.TRUCKID, truck.getId());
+                values.put(TruckTable.Column.VEHICLENUMBER, truck.getVehicleNumber());
+                getContentResolver().insert(TruckTable.CONTENT_URI, values);
+            }
+        } else {
+            for (TruckResources truck : trucks) {
+                ContentValues values = new ContentValues();
+                values.put(TruckTable.Column.NUMBERPLATE, truck.getNumberPlate());
+                values.put(TruckTable.Column.TRUCKID, truck.getId());
+                values.put(TruckTable.Column.VEHICLENUMBER, truck.getVehicleNumber());
+                getContentResolver().insert(TruckTable.CONTENT_URI, values);
+            }
         }
+
+
     }
 
     /**
@@ -129,9 +143,6 @@ public class TrucksIntentService extends IntentService {
      */
     private void handleActionSetDeviceTruck(String numberPlate) {
         Map<String, String> truck = getTruck(numberPlate);
-        System.out.println(" Number Plate "+truck.get("numberPlate"));
-        System.out.println("Truck ID "+truck.get("truckId"));
-        System.out.println("Vehicle Number "+truck.get("vehicleNumber"));
         Cursor cursor = null;
         cursor = getContentResolver().query(DeviceTruckTable.CONTENT_URI, null, null, null, DeviceTruckTable.DEFAULT_SORT);
 
@@ -140,7 +151,7 @@ public class TrucksIntentService extends IntentService {
             getContentResolver().delete(DeviceTruckTable.CONTENT_URI, null, null);
 
             ContentValues values = new ContentValues();
-            values.put(DeviceTruckTable.Column.NUMBERPLATE,truck.get("numberPlate"));
+            values.put(DeviceTruckTable.Column.NUMBERPLATE, truck.get("numberPlate"));
             values.put(DeviceTruckTable.Column.TRUCKID, truck.get("truckId"));
             values.put(DeviceTruckTable.Column.VEHICLENUMBER, truck.get("vehicleNumber"));
 
@@ -148,7 +159,7 @@ public class TrucksIntentService extends IntentService {
 
         } else {
             ContentValues values = new ContentValues();
-            values.put(DeviceTruckTable.Column.NUMBERPLATE,truck.get("numberPlate"));
+            values.put(DeviceTruckTable.Column.NUMBERPLATE, truck.get("numberPlate"));
             values.put(DeviceTruckTable.Column.TRUCKID, truck.get("truckId"));
             values.put(DeviceTruckTable.Column.VEHICLENUMBER, truck.get("vehicleNumber"));
 
@@ -158,21 +169,21 @@ public class TrucksIntentService extends IntentService {
     }
 
     private Map<String, String> getTruck(String numberPlate) {
-        Map<String, String> truck = new HashMap<String,String>();
+        Map<String, String> truck = new HashMap<String, String>();
         Cursor cursor;
-        cursor = getContentResolver().query(TruckTable.CONTENT_URI,null,null,null,TruckTable.DEFAULT_SORT);
-        if(cursor.moveToFirst()){
-            do{
-                np=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.NUMBERPLATE));
-                if (numberPlate.equalsIgnoreCase(np)){
-                    truckid=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.TRUCKID));
-                    truck.put("truckId",truckid);
-                    vn=cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.VEHICLENUMBER));
-                    truck.put("vehicleNumber",vn);
+        cursor = getContentResolver().query(TruckTable.CONTENT_URI, null, null, null, TruckTable.DEFAULT_SORT);
+        if (cursor.moveToFirst()) {
+            do {
+                np = cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.NUMBERPLATE));
+                if (numberPlate.equalsIgnoreCase(np)) {
+                    truckid = cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.TRUCKID));
+                    truck.put("truckId", truckid);
+                    vn = cursor.getString(cursor.getColumnIndexOrThrow(TruckTable.Column.VEHICLENUMBER));
+                    truck.put("vehicleNumber", vn);
 
-                    truck.put("numberPlate",np);
+                    truck.put("numberPlate", np);
                 }
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return truck;

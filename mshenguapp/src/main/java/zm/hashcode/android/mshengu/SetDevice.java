@@ -164,9 +164,9 @@ public class SetDevice extends Activity implements AdapterView.OnItemSelectedLis
 
         siteDropDown = (Spinner) findViewById(R.id.setdata_set_site_dropdown);
         List<String> list = new ArrayList<String>();
-        list.add("http://kmis.mshengutoilethire.co.za/mshengu/api/");
         list.add("http://212.71.251.128/mshengu/api/");
-        list.add("http://10.0.0.14:8080/mshengu/api/");
+        list.add("http://kmis.mshengutoilethire.co.za/mshengu/api/");
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         siteDropDown.setAdapter(dataAdapter);

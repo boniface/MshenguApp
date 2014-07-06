@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:text="Waste Extraction"
                     android:textSize="20dp"
-                    android:id="@+id/pump_out"
+                    android:id="@+id/waster_extraction"
                     android:checked="false" />
 
             </TableRow>
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:text="Clean Waste Tank and Toilet"
                     android:textSize="20dp"
-                    android:id="@+id/suction_out"
+                    android:id="@+id/clean_water_and_toilet"
                     android:checked="false" />
 
             </TableRow>
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text="Chemical Re-Charge"
                     android:textSize="20dp"
-                    android:id="@+id/scrub_floor"
+                    android:id="@+id/chemical_recharge"
                     android:checked="false" />
 
 
