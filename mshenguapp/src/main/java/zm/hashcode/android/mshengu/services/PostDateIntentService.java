@@ -12,7 +12,9 @@ import java.util.Map;
 
 import zm.hashcode.android.mshengu.connection.Connection;
 import zm.hashcode.android.mshengu.connection.MobileResponseMessage;
+import zm.hashcode.android.mshengu.database.DeviceTruckTable;
 import zm.hashcode.android.mshengu.database.SettingsTable;
+import zm.hashcode.android.mshengu.database.TruckTable;
 import zm.hashcode.android.mshengu.resources.UnitDeliveryResource;
 import zm.hashcode.android.mshengu.resources.UnitServiceResource;
 
@@ -133,6 +135,7 @@ public class PostDateIntentService extends IntentService {
         tasks.put("scrubFloor", scrub_floor_bool);
         tasks.put("rechargeBacket", rech_bucket_bool);
         tasks.put("cleanPerimeter", clean_peri_bool);
+        unitServiceResource.setTruckId(getDeviceTruckId());
 
         unitServiceResource.setServices(tasks);
         unitServiceResource.setIncident(data.getString("report_incident"));
@@ -156,5 +159,19 @@ public class PostDateIntentService extends IntentService {
             cursor.close();
         }
         return url;
+    }
+
+    private String getDeviceTruckId() {
+       String truckid = "";
+        Cursor cursor;
+        cursor = getContentResolver().query(DeviceTruckTable.CONTENT_URI, null, null, null, DeviceTruckTable.DEFAULT_SORT);
+        if (cursor.moveToFirst()) {
+            do {
+                truckid = cursor.getString(cursor.getColumnIndexOrThrow(DeviceTruckTable.Column.TRUCKID));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return truckid;
     }
 }
